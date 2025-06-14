@@ -53,7 +53,7 @@ lsusb | grep -i realtek
 cd ~/Downloads
 
 # Download the script
-wget https://raw.githubusercontent.com/your-repo/install_wifi_final.sh
+wget https://raw.githubusercontent.com/Ns81000/Realtek-RTW89-Wi-Fi-Driver/main/install_wifi_final.sh
 
 # Make it executable
 chmod +x install_wifi_final.sh
@@ -62,8 +62,8 @@ chmod +x install_wifi_final.sh
 ### Method 2: Clone Repository
 ```bash
 # Clone the entire repository
-git clone https://github.com/your-repo/rtw89-kali-installer.git
-cd rtw89-kali-installer
+git clone https://github.com/Ns81000/Realtek-RTW89-Wi-Fi-Driver.git
+cd Realtek-RTW89-Wi-Fi-Driver
 
 # Make the script executable
 chmod +x install_wifi_final.sh
@@ -256,6 +256,7 @@ If you encounter problems:
 ### Resources
 - **Kali Linux Documentation**: [kali.org/docs](https://www.kali.org/docs/)
 - **RTW89 Driver Source**: [lwfinger/rtw89](https://github.com/lwfinger/rtw89)
+- **Project Repository**: [Ns81000/Realtek-RTW89-Wi-Fi-Driver](https://github.com/Ns81000/Realtek-RTW89-Wi-Fi-Driver)
 - **Kernel Headers**: [packages.debian.org](https://packages.debian.org/)
 
 ### Before Seeking Help
