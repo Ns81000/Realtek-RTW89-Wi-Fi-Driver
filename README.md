@@ -251,12 +251,6 @@ If you encounter problems:
 3. Include full error messages
 4. Specify your Kali Linux version
 
-### Supported Versions
-- ✅ Kali Linux 2023.4
-- ✅ Kali Linux 2023.3
-- ✅ Kali Linux 2023.2
-- ⚠️ Older versions may require modifications
-
 ## 📞 Support
 
 ### Resources
