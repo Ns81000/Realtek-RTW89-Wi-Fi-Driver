@@ -151,7 +151,7 @@ sudo ./install_wifi_final.sh
 The script automatically fixes this common compilation error:
 ```c
 // Original (causes error):
-static void rtw89_ops_stop(struct ieee80211_hw *hw)
+static void rtw89_ops_stop(struct ieee80211_hw *hw
 
 // Patched (works correctly):
 static void rtw89_ops_stop(struct ieee80211_hw *hw, bool changed)
@@ -193,6 +193,23 @@ sudo apt install linux-headers-$(uname -r)
 2. Check if firmware is properly installed: `sudo apt install firmware-realtek`
 3. Verify driver is loaded: `lsmod | grep rtw89`
 
+#### ❌ Wi-Fi Stops Working After Kernel Update
+**Problem**: Kernel updates remove custom-installed drivers as they're tied to specific kernel versions.
+
+**Solution**: Reinstall the driver after any kernel update:
+```bash
+# 1. Remove old driver files
+sudo rm -rf /lib/modules/$(uname -r)/kernel/drivers/net/wireless/realtek/rtw89/
+
+# 2. Run the installation script again
+sudo ./install_wifi_final.sh
+
+# 3. Reboot
+sudo reboot
+```
+
+**Prevention**: After every `apt upgrade` that includes kernel updates, remember to reinstall this driver.
+
 ### Verification Commands
 ```bash
 # Check if driver is loaded
@@ -214,6 +231,14 @@ dmesg | grep rtw89
 1. **Reboot** your system (highly recommended)
 2. **Enable Wi-Fi** in network settings
 3. **Connect** to your wireless network
+
+### Important: Kernel Updates
+⚠️ **Critical Notice**: After any kernel update (via `apt upgrade` or `apt dist-upgrade`), you **must reinstall this driver**. Kernel updates will remove the custom-installed Wi-Fi driver.
+
+**After kernel updates:**
+1. Delete old driver: `sudo rm -rf /lib/modules/$(uname -r)/kernel/drivers/net/wireless/realtek/rtw89/`
+2. Run installation script again: `sudo ./install_wifi_final.sh`
+3. Reboot: `sudo reboot`
 
 ### Verification
 After reboot, verify installation:
