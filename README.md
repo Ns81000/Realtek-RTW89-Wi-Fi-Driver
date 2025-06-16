@@ -232,6 +232,27 @@ dmesg | grep rtw89
 2. **Enable Wi-Fi** in network settings
 3. **Connect** to your wireless network
 
+### ⚠️ Important: Dual Boot Systems
+**Critical Notice for Dual Boot Users**: If you're running Kali Linux in a dual boot configuration with another operating system (Windows, macOS, or another Linux distribution):
+
+**Before booting into Kali Linux:**
+1. If you previously booted into your other operating system
+2. **Completely shutdown** your computer (don't use restart)
+3. **Wait for 1 minute** after shutdown
+4. Then boot into Kali Linux
+
+**Why this is necessary:**
+- Other operating systems may leave the Wi-Fi hardware in an inconsistent state
+- A complete shutdown ensures proper hardware reset
+- The 1-minute wait allows capacitors to discharge completely
+- This prevents driver initialization conflicts
+
+**Symptoms if you skip this step:**
+- Wi-Fi adapter not detected
+- Driver loads but no networks visible
+- Intermittent connection issues
+- Hardware appearing as "disabled" in system settings
+
 ### Important: Kernel Updates
 ⚠️ **Critical Notice**: After any kernel update (via `apt upgrade` or `apt dist-upgrade`), you **must reinstall this driver**. Kernel updates will remove the custom-installed Wi-Fi driver.
 
