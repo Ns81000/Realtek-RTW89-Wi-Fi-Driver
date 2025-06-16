@@ -12,7 +12,8 @@
 # 3. Automatically patch the code to fix the known compilation error.
 # 4. Perform a clean, manual installation to avoid all installer bugs.
 # 5. Fix the known driver filename bug.
-# 6. Load the newly installed driver.
+# 6. *** NEW: Create the driver options file to fix cold boot & dual-boot issues. ***
+# 7. Load the newly installed driver.
 #
 # How to Use:
 # 1. Save this script as a file, for example: "install_wifi_final.sh".
@@ -120,8 +121,15 @@ for f in rtw_*.ko; do
   fi
 done
 
-# === STEP 5: FINAL ACTIVATION & VERIFICATION ===
-log_info "Step 5: Activating and verifying the new driver..."
+# === STEP 5: APPLY HARDWARE COMPATIBILITY FIX ===
+log_info "Step 5: Applying the fix for cold boot and dual-boot issues..."
+# This creates a configuration file to disable ASPM, which fixes the firmware failure.
+CONF_FILE="/etc/modprobe.d/rtw89.conf"
+log_info "Creating configuration file at $CONF_FILE..."
+echo "options rtw89_pci disable_aspm=y" > "$CONF_FILE"
+
+# === STEP 6: FINAL ACTIVATION & VERIFICATION ===
+log_info "Step 6: Activating and verifying the new driver..."
 
 log_info "Updating module dependencies..."
 depmod -a
@@ -132,7 +140,7 @@ modprobe rtw89_8851be
 log_info "Verifying that the driver is loaded and active..."
 if lsmod | grep -q "rtw89pci"; then
     log_info "✅ SUCCESS! The Wi-Fi driver has been installed and is now active."
-    log_info "Your Wi-Fi should be working. A final reboot is highly recommended."
+    log_info "Your Wi-Fi should be working permanently. A final reboot is highly recommended."
     echo -e "\nTo complete the process, please run 'sudo reboot' now."
 else
     log_error "The driver was installed but failed to load. Please review the output above for errors."
